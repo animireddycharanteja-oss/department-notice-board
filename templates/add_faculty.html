@@ -1,0 +1,132 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Create Faculty Account</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+    <style>
+
+        .faculty-form-container {
+            max-width: 450px;
+        }
+
+        .message-box {
+            background: #e4f7ed;
+            color: #23965c;
+            padding: 12px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        .faculty-form-container .form-group {
+            margin-bottom: 20px;
+        }
+
+        .faculty-form-container input {
+            width: 100%;
+        }
+
+    </style>
+
+</head>
+
+
+<body class="credentials-page">
+
+
+    <div class="credentials-container faculty-form-container">
+
+
+        <h2>Create Faculty Account</h2>
+
+        <p class="credentials-subtitle">
+            Create a new account for a department faculty member.
+        </p>
+
+
+        <!-- Display Message -->
+        {% if message %}
+
+            <div class="message-box">
+                {{ message }}
+            </div>
+
+        {% endif %}
+
+
+        <form method="POST">
+
+
+            <!-- Faculty Name -->
+            <div class="form-group">
+
+                <label>Faculty Name</label>
+
+                <input type="text"
+                       name="name"
+                       placeholder="Enter faculty name"
+                       required>
+
+            </div>
+
+
+            <!-- Username -->
+            <div class="form-group">
+
+                <label>Username</label>
+
+                <input type="text"
+                       name="username"
+                       placeholder="Create faculty username"
+                       required>
+
+            </div>
+
+
+            <!-- Password -->
+            <div class="form-group">
+
+                <label>Password</label>
+
+                <input type="password"
+                       name="password"
+                       placeholder="Create faculty password"
+                       required>
+
+            </div>
+
+
+            <!-- Submit Button -->
+            <button type="submit"
+                    class="update-button">
+
+                Create Faculty Account
+
+            </button>
+
+
+        </form>
+
+
+        <!-- Back to Dashboard -->
+        <a href="/admin/dashboard" class="back-link">
+
+            ← Back to Admin Dashboard
+
+        </a>
+
+
+    </div>
+
+
+</body>
+</html>

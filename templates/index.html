@@ -1,0 +1,251 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Department Notice Board</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body class="home-page">
+
+    <!-- Header -->
+    <header class="home-header">
+
+        <div class="header-content">
+
+            <div class="brand">
+                <div class="brand-icon">DB</div>
+
+                <div>
+                    <h1>Department Notice Board</h1>
+                    <p>Department Announcements Portal</p>
+                </div>
+            </div>
+
+            <div class="login-links">
+                <a href="/login" class="admin-login">Admin Login</a>
+                <a href="/faculty/login" class="faculty-login">Faculty Login</a>
+            </div>
+
+        </div>
+
+        <nav class="home-nav">
+            <a href="/" class="active">Home</a>
+            <a href="#notices">Notices</a>
+            <a href="#about">About</a>
+        </nav>
+
+    </header>
+
+
+    <main>
+
+        <!-- Welcome Section -->
+        <section class="home-hero">
+
+            <div class="hero-content">
+
+                <span class="hero-label">
+                    WELCOME TO OUR DEPARTMENT
+                </span>
+
+                <h2>Stay Informed. Stay Connected.</h2>
+
+                <p>
+                    Access the latest department announcements,
+                    academic updates, events and important notices
+                    in one place.
+                </p>
+
+                <a href="#notices" class="hero-button">
+                    Explore Latest Notices →
+                </a>
+
+            </div>
+
+            <div class="hero-decoration">
+                <div class="hero-circle">DB</div>
+            </div>
+
+        </section>
+
+
+        <!-- Search Section -->
+        <section class="home-search">
+
+            <div class="search-heading">
+                <h2>Find Announcements</h2>
+                <p>Search for department notices and updates.</p>
+            </div>
+
+            <div class="search-box">
+
+                <input type="text"
+                       placeholder="Search notices..."
+                       aria-label="Search notices">
+
+                <button type="button">Search</button>
+
+            </div>
+
+        </section>
+
+
+        <!-- Notices Section -->
+        <section id="notices" class="home-notices">
+
+            <div class="section-heading">
+
+                <div>
+                    <span class="section-label">STAY UPDATED</span>
+
+                    <h2>Latest Announcements</h2>
+
+                    <p>
+                        Important updates from your department.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="notice-container">
+
+                {% for notice in notices %}
+
+                <div class="notice-card">
+
+                    <!-- Notice Category -->
+                    {% if notice['category'] %}
+
+                    <span class="category">
+                        {{ notice['category'] }}
+                    </span>
+
+                    {% endif %}
+
+
+                    <!-- Notice Title -->
+                    {% if notice['title'] %}
+
+                    <h3>{{ notice['title'] }}</h3>
+
+                    {% endif %}
+
+
+                    <!-- Notice Description -->
+                    {% if notice['description'] %}
+
+                    <p class="notice-description">
+                        {{ notice['description'] }}
+                    </p>
+
+                    {% endif %}
+
+
+                    <!-- Notice Image -->
+                    {% if notice['image'] %}
+
+                    <div class="notice-image-container">
+
+                        <img
+                            src="{{ url_for('uploaded_file', filename=notice['image']) }}"
+                            alt="Notice Image"
+                            class="notice-image">
+
+                    </div>
+
+                    {% endif %}
+
+
+                    <!-- Posted By -->
+                    <p class="posted-by">
+
+                        {% if notice['faculty_name'] %}
+
+                            Posted by: {{ notice['faculty_name'] }}
+
+                        {% else %}
+
+                            Posted by: Admin / Department
+
+                        {% endif %}
+
+                    </p>
+
+
+                    <!-- Posted Date -->
+                    <small class="notice-date">
+                        Posted: {{ notice['created_at'] }}
+                    </small>
+
+                </div>
+
+
+                {% else %}
+
+                <!-- No Notices Available -->
+                <div class="empty-notices">
+
+                    <div class="empty-icon">📢</div>
+
+                    <h3>No Notices Available</h3>
+
+                    <p>
+                        There are no department announcements
+                        at the moment.
+                    </p>
+
+                </div>
+
+                {% endfor %}
+
+            </div>
+
+        </section>
+
+
+        <!-- About Section -->
+        <section id="about" class="home-about">
+
+            <span class="section-label">
+                ABOUT OUR PORTAL
+            </span>
+
+            <h2>About Department Notice Board</h2>
+
+            <p>
+                The Department Notice Board is a centralized platform
+                that helps students access department announcements
+                in one place. Admins and faculty can share important
+                updates, notices and images to keep everyone informed.
+            </p>
+
+        </section>
+
+    </main>
+
+
+    <!-- Footer -->
+    <footer class="home-footer">
+
+        <h3>Department Notice Board</h3>
+
+        <p>Keeping Students and Faculty Connected.</p>
+
+        <div class="footer-line"></div>
+
+        <small>
+            Department Notice Board | College Announcements
+        </small>
+
+    </footer>
+
+</body>
+</html>

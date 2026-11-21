@@ -1,0 +1,315 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Faculty Add Notice</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+    <style>
+
+        .notice-form-container {
+            max-width: 550px;
+        }
+
+        .notice-form-container textarea {
+            width: 100%;
+            min-height: 120px;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 15px;
+            font-family: Arial, sans-serif;
+            resize: vertical;
+        }
+
+        .notice-form-container input[type="text"] {
+            width: 100%;
+        }
+
+        .notice-form-container .form-group {
+            margin-bottom: 20px;
+        }
+
+        .upload-section {
+            margin-top: 25px;
+            padding: 20px;
+            background: #f4f7fc;
+            border: 1px dashed #b8c9df;
+            border-radius: 8px;
+        }
+
+        .upload-section h3 {
+            margin-bottom: 8px;
+            color: #263b55;
+        }
+
+        .upload-section p {
+            color: #778398;
+            font-size: 13px;
+            margin-bottom: 15px;
+        }
+
+        .upload-button {
+            padding: 11px 18px;
+            border: none;
+            border-radius: 6px;
+            color: white;
+            background: #2878d0;
+            cursor: pointer;
+            margin: 5px 5px 5px 0;
+            font-size: 14px;
+        }
+
+        .upload-button:hover {
+            background: #125ca1;
+        }
+
+        #preview {
+            display: none;
+            max-width: 100%;
+            max-height: 250px;
+            margin-top: 18px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+        }
+
+        .notice-submit-button {
+            width: 100%;
+            margin-top: 22px;
+        }
+
+    </style>
+
+</head>
+
+
+<body class="credentials-page">
+
+    <div class="credentials-container notice-form-container">
+
+
+        <h2>Post Faculty Notice</h2>
+
+        <p class="credentials-subtitle">
+            Share important updates with department students.
+        </p>
+
+
+        <form method="POST" enctype="multipart/form-data">
+
+
+            <!-- Notice Title -->
+            <div class="form-group">
+
+                <label>Notice Title</label>
+
+                <input type="text"
+                       name="title"
+                       placeholder="Enter notice title">
+
+            </div>
+
+
+            <!-- Description -->
+            <div class="form-group">
+
+                <label>Description</label>
+
+                <textarea name="description"
+                          placeholder="Enter notice description"></textarea>
+
+            </div>
+
+
+            <!-- Category -->
+            <div class="form-group">
+
+                <label>Category</label>
+
+                <input type="text"
+                       name="category"
+                       placeholder="Enter notice category">
+
+            </div>
+
+
+            <!-- Image Upload -->
+            <div class="upload-section">
+
+                <h3>Attach Image (Optional)</h3>
+
+                <p>
+                    Take a photo or select an image from your device.
+                </p>
+
+
+                <!-- Camera Button -->
+                <button type="button"
+                        class="upload-button"
+                        id="cameraButton">
+
+                    📷 Camera
+
+                </button>
+
+
+                <input type="file"
+                       id="cameraInput"
+                       name="image"
+                       accept="image/*"
+                       capture="environment"
+                       hidden>
+
+
+                <!-- Gallery Button -->
+                <button type="button"
+                        class="upload-button"
+                        id="galleryButton">
+
+                    🖼️ Gallery
+
+                </button>
+
+
+                <input type="file"
+                       id="galleryInput"
+                       accept="image/*"
+                       hidden>
+
+
+                <!-- Image Preview -->
+                <img id="preview"
+                     alt="Selected image preview">
+
+            </div>
+
+
+            <!-- Submit Button -->
+            <button type="submit"
+                    class="update-button notice-submit-button">
+
+                Post Notice
+
+            </button>
+
+
+        </form>
+
+
+        <!-- Back to Dashboard -->
+        <a href="/faculty/dashboard" class="back-link">
+
+            ← Back to Faculty Dashboard
+
+        </a>
+
+
+    </div>
+
+
+    <script>
+
+        const cameraInput = document.getElementById("cameraInput");
+        const galleryInput = document.getElementById("galleryInput");
+
+        const cameraButton = document.getElementById("cameraButton");
+        const galleryButton = document.getElementById("galleryButton");
+
+        const preview = document.getElementById("preview");
+
+
+        // Open Camera
+        cameraButton.addEventListener("click", function() {
+
+            cameraInput.click();
+
+        });
+
+
+        // Open Gallery
+        galleryButton.addEventListener("click", function() {
+
+            galleryInput.click();
+
+        });
+
+
+        // Camera Image Selection
+        cameraInput.addEventListener("change", function() {
+
+            galleryInput.value = "";
+
+            showPreview(cameraInput.files[0]);
+
+        });
+
+
+        // Gallery Image Selection
+        galleryInput.addEventListener("change", function() {
+
+            const file = galleryInput.files[0];
+
+            if (file) {
+
+                if (!file.type.startsWith("image/")) {
+
+                    alert("Please select an image.");
+
+                    galleryInput.value = "";
+
+                    preview.style.display = "none";
+
+                    return;
+
+                }
+
+                const dataTransfer = new DataTransfer();
+
+                dataTransfer.items.add(file);
+
+                cameraInput.files = dataTransfer.files;
+
+                showPreview(file);
+
+            }
+
+        });
+
+
+        // Show Image Preview
+        function showPreview(file) {
+
+            if (file) {
+
+                if (!file.type.startsWith("image/")) {
+
+                    alert("Please select an image.");
+
+                    cameraInput.value = "";
+                    galleryInput.value = "";
+
+                    preview.style.display = "none";
+
+                    return;
+
+                }
+
+                preview.src = URL.createObjectURL(file);
+
+                preview.style.display = "block";
+
+            }
+
+        }
+
+    </script>
+
+
+</body>
+</html>

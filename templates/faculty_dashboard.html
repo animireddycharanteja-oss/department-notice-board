@@ -1,0 +1,156 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Faculty Dashboard</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body class="dashboard-page">
+
+    <!-- Header -->
+    <header class="dashboard-header">
+
+        <div class="dashboard-brand">
+
+            <div class="dashboard-logo">DB</div>
+
+            <div>
+                <h1>Department Notice Board</h1>
+                <p>Faculty Portal</p>
+            </div>
+
+        </div>
+
+        <a href="/logout" class="dashboard-logout">
+            Logout
+        </a>
+
+    </header>
+
+
+    <main class="dashboard-main">
+
+        <!-- Welcome Section -->
+        <section class="dashboard-welcome">
+
+            <span class="dashboard-label">
+                FACULTY PORTAL
+            </span>
+
+            <h2>Welcome, Faculty!</h2>
+
+            <p>
+                Manage your department notices and share
+                important announcements with students.
+            </p>
+
+        </section>
+
+
+        <!-- Dashboard Options -->
+        <section class="dashboard-section">
+
+            <div class="dashboard-section-heading">
+
+                <h2>Faculty Dashboard</h2>
+
+                <p>Select an option to continue.</p>
+
+            </div>
+
+
+            <div class="dashboard-grid">
+
+
+                <!-- Add Notice -->
+                <a href="/faculty/add" class="dashboard-card">
+
+                    <div class="dashboard-card-icon blue-icon">
+                        <span>＋</span>
+                    </div>
+
+                    <h3>Add Notice</h3>
+
+                    <p>
+                        Publish new department notices
+                        and share important updates.
+                    </p>
+
+                    <span class="dashboard-card-link">
+                        Open Option →
+                    </span>
+
+                </a>
+
+
+                <!-- Manage My Notices -->
+                <a href="/faculty/my-notices" class="dashboard-card">
+
+                    <div class="dashboard-card-icon purple-icon">
+                        <span>☷</span>
+                    </div>
+
+                    <h3>Manage My Notices</h3>
+
+                    <p>
+                        View and manage the notices
+                        posted by you.
+                    </p>
+
+                    <span class="dashboard-card-link">
+                        Open Option →
+                    </span>
+
+                </a>
+
+
+                <!-- View All Notices -->
+                <a href="/" class="dashboard-card">
+
+                    <div class="dashboard-card-icon green-icon">
+                        <span>◉</span>
+                    </div>
+
+                    <h3>View All Department Notices</h3>
+
+                    <p>
+                        View all announcements
+                        published by the department.
+                    </p>
+
+                    <span class="dashboard-card-link">
+                        Open Option →
+                    </span>
+
+                </a>
+
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- Footer -->
+    <footer class="dashboard-footer">
+
+        <h3>Department Notice Board</h3>
+
+        <p>Faculty Portal</p>
+
+        <small>
+            College Announcements Management System
+        </small>
+
+    </footer>
+
+</body>
+</html>
